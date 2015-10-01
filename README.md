@@ -1,3 +1,31 @@
+> ### About this demo
+> 
+> This repo automatically deploys to its own [`gh-pages`](https://pages.github.com/) via a **custom build system** (gulp in this case).
+> 
+> It works by configuring Travis to use an adapted version of X1011’s brilliant [git-directory-deploy](https://github.com/X1011/git-directory-deploy) script to push the built `dist` to `gh-pages`.
+> 
+> I'm using a fork of [google/web-starter-kit](https://github.com/google/web-starter-kit) as the base, because it's a good reference example of a static site with a custom build system.
+> 
+> The only changes in this fork are ([view diff](https://github.com/google/web-starter-kit/compare/3b82b68e32...callumlocke:master)):
+> 
+> - altered the Travis config in `.travis.yml`
+> - added `./deploy.sh`
+> - added this notice to the readme
+> 
+> **How it works:** whenever `master` is updated on this repo, Travis does its usual build (`npm test`, which in this project runs `gulp`). If successful, Travis then executes `./deploy.sh`, which commits the contents of the built `dist` to `gh-pages`, and pushes this branch back to Github, which publishes it to the web.
+> 
+> In short: you can edit a Sass file in this repo, and (in a few minutes) see the style change on this site:
+> 
+> **[callumlocke.github.io/auto-deploy-demo](http://callumlocke.github.io/auto-deploy-demo/)**
+>
+> Notes:
+>
+> - The commit message on `gh-pages` tells you which commit from `master` caused that deploy.
+> - Nothing gets pushed to `gh-pages` if there's no actual change in the `dist`.
+> - PRs work great – Travis will only deploy once a change is merged into `master`, never from a branch.
+> - If any deploy fails, Travis marks the build as errored: [![Build Status](https://travis-ci.org/callumlocke/auto-deploy-demo.svg?branch=master)](https://travis-ci.org/callumlocke/auto-deploy-demo)
+
+
 # [![Web Starter Kit](https://cloud.githubusercontent.com/assets/170270/3343034/ceef6e92-f899-11e3-96b9-5d9d69d97a00.png)](https://github.com/google/web-starter-kit/releases/latest)
 
 ## Overview
